@@ -38,3 +38,11 @@ variable log_analytics_workspace_location {
 variable log_analytics_workspace_sku {
     default = "PerGB2018"
 }
+
+variable vnet_name {
+    default = "aks-vnet"
+}
+
+variable subnet_name {
+    default = "cluster-subnet"
+}
