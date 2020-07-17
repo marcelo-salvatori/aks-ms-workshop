@@ -3,13 +3,9 @@ resource "azurerm_resource_group" "k8s" {
     location = var.location
 }
 
-resource "random_id" "log_analytics_workspace_name_suffix" {
-    byte_length = 8
-}
-
 resource "azurerm_log_analytics_workspace" "test" {
     # The WorkSpace name has to be unique across the whole of azure, not just the current subscription/tenant.
-    name                = "${var.log_analytics_workspace_name}-${random_id.log_analytics_workspace_name_suffix.dec}"
+    name                = var.log_analytics_workspace_name
     location            = var.log_analytics_workspace_location
     resource_group_name = azurerm_resource_group.k8s.name
     sku                 = var.log_analytics_workspace_sku
@@ -32,7 +28,8 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     name                = var.cluster_name
     location            = azurerm_resource_group.k8s.location
     resource_group_name = azurerm_resource_group.k8s.name
-    dns_prefix          = var.dns_prefix
+    dns_prefix          = var.dns_prefix    
+    node_resource_group = var.node_resource_group
 
     linux_profile {
         admin_username = "msalvatori"
@@ -55,8 +52,8 @@ resource "azurerm_kubernetes_cluster" "k8s" {
 
     addon_profile {
         oms_agent {
-        enabled                    = true
-        log_analytics_workspace_id = azurerm_log_analytics_workspace.test.id
+            enabled                    = true
+            log_analytics_workspace_id = azurerm_log_analytics_workspace.test.id
         }
     }
 

@@ -26,7 +26,7 @@ variable location {
 }
 
 variable log_analytics_workspace_name {
-    default = "testLogAnalyticsWorkspaceName"
+    default = "mfsconsultingloganalytics"
 }
 
 # refer https://azure.microsoft.com/global-infrastructure/services/?products=monitor for log analytics available regions
@@ -45,4 +45,12 @@ variable vnet_name {
 
 variable subnet_name {
     default = "cluster-subnet"
+}
+
+variable node_resource_group {
+    default = "nodesresourcesrg"
+}
+
+variable acr_name {
+    default = "mfsconsultingacr"
 }
