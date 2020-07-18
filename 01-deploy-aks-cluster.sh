@@ -45,6 +45,7 @@ az aks create \
 az aks get-credentials \
     --resource-group $RESOURCE_GROUP \
     --name $AKS_CLUSTER_NAME
+    --overwrite-existing
 
 kubectl create namespace ratingsapp
 kubectl config set-context --current --namespace=ratingsapp
