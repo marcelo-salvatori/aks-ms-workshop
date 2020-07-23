@@ -13,4 +13,4 @@ kubectl create secret generic mongosecret \
     --namespace ratingsapp \
     --from-literal=MONGOCONNECTION="mongodb://$mongodbUsername:$mongodbPassword@ratings-mongodb.ratingsapp:27017/ratingsdb"
 
-kubectl describe secret mongosecret1 --namespace ratingsapp
+kubectl describe secret mongosecret --namespace ratingsapp
